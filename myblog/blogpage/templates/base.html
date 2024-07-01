@@ -1,6 +1,6 @@
 {%load static%}
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="eng">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,11 +16,20 @@
     <link rel="stylesheet" href="{% static "css/main.css" %}">
     <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
     <script src="{% static 'ckeditor5/ckeditor.js' %}"></script>
+    {{ form.media }}
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="82" style="background-color: black;">
-      <header id="home">
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="82">
+    
        {%include 'nav.html'%}
-      </header>
+       {%if messages %}
+       {% for message in messages%}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {%endfor%}
+      {%endif%}
+     
       <main>
         {%block content%}
 
@@ -33,7 +42,7 @@
           <a href=""><img src="img/pinterest-footer.svg" alt=""></a>
         </div>
         <div class="copyright pt-4 text-muted text-center">
-          <p>&copy; 2022 YOUR-DOMAIN | Created by <a href="https://firmbee.com/solutions/free-invoicing-app-billing-software/" title="Firmbee - Free Invoicing App" target="_blank">Firmbee.com</a> </p>
+          <p>&copy; 2024 My Sexy Blog| Created by <a href="https://firmbee.com/solutions/free-invoicing-app-billing-software/" title="Firmbee - Free Invoicing App" target="_blank">Firmbee.com</a> </p>
       </div>
       </footer>
       <div class="fb2022-copy">Fbee 2022 copyright</div>

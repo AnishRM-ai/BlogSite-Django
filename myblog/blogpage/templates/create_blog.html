@@ -1,23 +1,22 @@
 <!-- create_blog.html -->
 
 {% extends 'base.html'%}
-{%load static%}
 {%block content %}
 
-</br></br></br></br></br>
+<body style = "background-color: #2a2b2e;">
 
     <main class="container my-5">
         <h2 class="text-center mb-4">Create Blog</h2>
-        <form method="post" enctype="multipart/form-data">  <!-- Include enctype for file uploads -->
+        <form method="POST" enctype="multipart/form-data">  <!-- Include enctype for file uploads -->
             {% csrf_token %}
             {{ form.media }}
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10 col-sm-12">
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    <button type="submit" class="btn btn-primary mt-3">Create</button>
                 </div>
             </div>
         </form>
     </main>
-
+</body>
 {%endblock%}

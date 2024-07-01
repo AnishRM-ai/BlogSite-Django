@@ -9,9 +9,15 @@ class Blog(models.Model):
     contents = CKEditor5Field()
     tags = models.CharField(max_length=200)
     is_popular = models.BooleanField(default=False)
-    cover_image = models.ImageField()
+    cover_image = models.ImageField(upload_to='media/', blank=True, null=True)
     
     def __str__(self):
         return self.title
     
+    
+class Comments(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=200)
+    comment = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
     

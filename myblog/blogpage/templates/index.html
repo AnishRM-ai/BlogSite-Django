@@ -1,5 +1,6 @@
 
 {%extends 'base.html'%}
+{%load static %}
 {%block content%}
       
         <section class="main-slider">
@@ -38,15 +39,15 @@
         <section id="contact" class="social-media">
             <div class="container">
               <h2>WANT TO KNOW MORE ABOUT US?</h2>
-              <a href=""><img src="img/facebook_icon.svg" alt=""></a>
-              <a href=""><img src="img/instagram logo_icon.svg" alt=""></a>
-              <a href=""><img src="img/pinterest_icon.svg" alt=""></a>
+              <a href=""><img src="{% static "img/facebook_icon.svg" %}" alt=""></a>
+              <a href=""><img src="{% static "img/instagram logo_icon.svg" %}" alt=""></a>
+              <a href=""><img src="{% static "img/pinterest_icon.svg"%}" alt=""></a>
             </div>
         </section>
         <section class="new-articles">
           <div class="card-group">
             <div class="card bg-dark text-white">
-              <img src="img/architecture-1857175_1920.jpg" class="card-img" alt="...">
+              <img src="{% static "img/architecture-1857175_1920.jpg" %}" class="card-img" alt="...">
               <div class="card-img-overlay p-3">
                 <div class="text-overlay">
                 <p class="card-text text-uppercase">Most Popular</p>
@@ -60,7 +61,7 @@
               </div>
             </div>
             <div class="card bg-dark text-white">
-              <img src="img/castle-1998435_1920.jpg" class="card-img" alt="...">
+              <img src="{% static "img/castle-1998435_1920.jpg"%}" class="card-img" alt="...">
               <div class="card-img-overlay p-3">
                 <div class="text-overlay">
                   <p class="card-text text-uppercase">Most Popular</p>
@@ -74,7 +75,7 @@
               </div>
             </div>
             <div class="card bg-dark text-white">
-              <img src="img/staircase-274614_1920.jpg" class="card-img" alt="...">
+              <img src="{% static "img/staircase-274614_1920.jpg" %}" class="card-img" alt="...">
               <div class="card-img-overlay p-3">
                 <div class="text-overlay">
                   <p class="card-text text-uppercase">Most Popular</p>
@@ -100,33 +101,14 @@
                   <div class="post-meta">
                     <span><i class="far fa-user"></i> Posted by {{blogpost.author}}</span><span><i class="far fa-calendar"></i> {{blogpost.pub_date}}</span>
                   </div>
-                  <a href="single-post.html"  class="post-title">{{blogpost.title}}</a>
-                  <p class="post-content">{{ blogpost.contents|safe }}</p>
+                  <a href="{% url 'article' blogpost.title %}"  class="post-title">{{blogpost.title}}</a>
+                  <p class="post-content">{{ blogpost.contents|safe |truncatewords:25 }} </p>
                   <div class="post-meta">
                     <span><i class="far fa-comment-alt"></i> 20 comments</span>
                   </div>
                 </div>
                 {%endfor%}
-                <div class="post-item">
-                  <div class="post-meta">
-                    <span><i class="far fa-user"></i> Posted by someone</span><span><i class="far fa-calendar"></i> 30 07 2021</span>
-                  </div>
-                  <a href="single-post.html"  class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
-                  <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt perspiciatis ex ipsam similique blanditiis. Culpa hic quia, repellendus corrupti perspiciatis praesentium necessitatibus alias illo quidem. Repudiandae expedita illum aspernatur magni?</p>
-                  <div class="post-meta">
-                    <span><i class="far fa-comment-alt"></i> 20 comments</span>
-                  </div>
-                </div>
-                <div class="post-item">
-                  <div class="post-meta">
-                    <span><i class="far fa-user"></i> Posted by someone</span><span><i class="far fa-calendar"></i> 30 07 2021</span>
-                  </div>           
-                  <a href="single-post.html"  class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
-                  <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt perspiciatis ex ipsam similique blanditiis. Culpa hic quia, repellendus corrupti perspiciatis praesentium necessitatibus alias illo quidem. Repudiandae expedita illum aspernatur magni?</p>
-                  <div class="post-meta">
-                    <span><i class="far fa-comment-alt"></i> 20 comments</span>
-                  </div>
-                </div>
+               </div>
                 <a href="blog.html" class="main-button">View all posts</a>
             </div>          
           </div>

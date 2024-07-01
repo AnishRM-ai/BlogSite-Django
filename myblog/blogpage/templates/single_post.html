@@ -1,0 +1,131 @@
+
+{%extends 'base.html'%}
+{%block content%}
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="82">
+      <main>
+        <div class="container">
+          <div class="row mainmargin">
+            <div class="single-post col-md-8">
+              <h2 class="underscore">{{blog.title}}</h2>
+              <div class="post-meta">
+                <span><i class="far fa-user"></i> Posted by {{blog.author}}</span><span><i class="far fa-calendar"></i> {{blog.pub_date}}</span><span><i class="far fa-comment-alt"></i> 0 comments</span>
+              </div>
+              {%if blog.cover_image %}
+              <img src="{{blog.cover_image.url}}" alt="">
+              {% endif %}
+              <p>{{blog.contents | safe}}</p>
+              
+             
+              <div class="share">
+                <a class="main-button" href=""><i class="fab fa-facebook-f"></i> FACEBOOK</a>
+                <a class="main-button" href=""> <i class="fab fa-google-plus-g"></i> GOOGLE+</a>
+                <a class="main-button" href=""><i class="fab fa-twitter"></i> TWITTER</a>
+                <a class="main-button" href=""><i class="fab fa-linkedin-in"></i> LINKEDIN</a>
+                <a class="main-button" href=""><i class="fab fa-pinterest-p"></i> PINTEREST</a>
+              </div>
+              <div class="navigation">
+                <a class="prew"><i class="fas fa-chevron-left"></i> PREVIOUS</a>
+                <a class="next">NEXT <i class="fas fa-chevron-right"></i></a>
+              </div>
+              <div class="line"></div>
+              <form id="commentForm">
+                <!-- Message input -->
+                <div class="mb-3">
+                  <label class="form-label" for="comment">Leave a Comment</label>
+                  <textarea class="form-control" id="comment" type="text" placeholder="" style="height: 10rem;" data-sb-validations="required"></textarea>
+                  <div class="invalid-feedback" data-sb-feedback="message:required">Comment is required.</div>
+                </div>
+                <!-- Name input -->
+                <div class="mb-3">
+                  <input class="form-control" id="name" type="text" placeholder="Name *" data-sb-validations="required" />
+                  <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                </div>
+                <!-- Email address input -->
+                <div class="mb-3">
+                  <input class="form-control" id="emailAddress" type="email*" placeholder="Email Address *" data-sb-validations="required, email" />
+                  <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                  <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                </div>
+                <!-- Form submissions success message -->
+                <div class="d-none" id="submitSuccessMessage">
+                  <div class="text-center mb-3">Form submission successful!</div>
+                </div>
+                <!-- Form submissions error message -->
+                <div class="d-none" id="submitErrorMessage">
+                  <div class="text-center text-danger mb-3">Error sending message!</div>
+                </div>
+                <!-- Form submit button -->
+                <div class="d-grid">
+                  <button class="main-button" id="submitButton" type="submit">Post Comment</button>
+                </div>
+              </form>
+            </div>
+            <!-----------------------------SIDE BARR---------------------------->
+            <div class="sidebar col-md-4">
+              <div class="input-group">
+                <div class="form-outline">
+                  <input id="search-input" type="search" id="form1" class="form-control" placeholder="search" />
+                </div>
+                <button id="search-button" type="button" class="btn dark">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <!--Recent Posts -->
+              <div class="recent-posts pt-5">
+                <h4 class="mb-3">RECENT POSTS</h4>
+                <div class="post-item">
+                  <a href="single-post.html" class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                  <div class="post-meta">
+                    <span><i class="far fa-user"></i> Posted by someone</span><span><i class="far fa-calendar"></i> 30 07 2021</span><span><i class="far fa-comment-alt"></i> 0 comments</span>
+                  </div>
+                  <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt perspiciatis ex ipsam similique blanditiis. Culpa hic quia...</p>
+                </div>
+                <div class="post-item">
+                  <a href="single-post.html" class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                  <div class="post-meta">
+                    <span><i class="far fa-user"></i> Posted by someone</span><span><i class="far fa-calendar"></i> 30 07 2021</span><span><i class="far fa-comment-alt"></i> 0 comments</span>
+                  </div>
+                  <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt perspiciatis ex ipsam similique blanditiis. Culpa hic quia...</p>
+                </div>
+                <div class="post-item">
+                  <a href="single-post.html" class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                  <div class="post-meta">
+                    <span><i class="far fa-user"></i> Posted by someone</span><span><i class="far fa-calendar"></i> 30 07 2021</span><span><i class="far fa-comment-alt"></i> 0 comments</span>
+                  </div>
+                  <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt perspiciatis ex ipsam similique blanditiis. Culpa hic quia...</p>
+                </div>
+                <a class="main-button">View all posts</a>
+                <div class="popular pt-5">
+
+                  <!-- POPULAR ARTICLES-->
+                  <h4 class="mb-3">READ MOST POPULAR ARTICLES</h4>
+                  
+                 {% for popular in popularblog%}
+                  <div class="card bg-dark text-white">
+                    <img src="{{ popular.cover_image.url }}" class="card-img" alt="...">
+                    <div class="card-img-overlay p-3">
+                      <div class="text-overlay">
+                      <h5 class="card-title text-uppercase">{{popular.title}} </h5>
+                      <div class="line"></div>
+                      <div class="card-text article-meta">
+                        <span><i class="far fa-user"></i> Posted by {{popular.author}} </span><span><i class="far fa-calendar"></i> {{popular.pub_date}}</span><span><i class="far fa-comment-alt"></i> 300 comments</span>
+                      </div>
+                      <a href="{% url 'article' popular.title %}" class="btn btn-outline-light">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                
+                {%endfor%}
+                  
+               
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </main>
+     
+{%endblock%}
