@@ -55,9 +55,9 @@ def login_view(request):
     return render(request, 'login.html')    
 
 def logout_view(request):
-        logout(request)
-        messages.success(request,"You have been logged out.")
-        redirect ('homepage')
+    logout(request)
+    messages.success(request,"You have been logged out.")
+    return redirect('homepage')
     
 
 def singleBlog(request, title):
@@ -66,3 +66,16 @@ def singleBlog(request, title):
     return render(request, 'single_post.html', {'blog': blog, 'popularblog': popularBlog})
     
 
+#about page view
+def about(request):
+    return render(request, 'about.html', {})
+
+
+#All Blog PAge
+def all_blogPost(request):
+    allpost = Blog.objects.all()
+    return render(request,'blog.html', {'allpost':allpost})
+
+#contact page view
+def contact(request):
+    return render(request,'contact.html', {})

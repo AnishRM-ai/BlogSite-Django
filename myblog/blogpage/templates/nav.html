@@ -23,9 +23,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <a class="nav-link" href="{% url 'homepage'%}">home</a>
-          <a class="nav-link" href="about.html">about</a>
-          <a class="nav-link" href="contact.html">contact</a>
-          <a class="nav-link" href="blog.html">Blog</a>
+          <a class="nav-link" href="{% url 'about'%}">about</a>
+          <a class="nav-link" href="{% url 'contact'%}">contact</a>
+          <a class="nav-link" href="{% url 'allposts'%}">Blog</a>
           {% if user.is_authenticated %}
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           <a class="nav-link" href="{% url 'blogcreate' %}">Create Post</a>
