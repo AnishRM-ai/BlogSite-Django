@@ -28,38 +28,41 @@
                 <a class="next">NEXT <i class="fas fa-chevron-right"></i></a>
               </div>
               <div class="line"></div>
-              <form id="commentForm">
-                <!-- Message input -->
-                <div class="mb-3">
-                  <label class="form-label" for="comment">Leave a Comment</label>
-                  <textarea class="form-control" id="comment" type="text" placeholder="" style="height: 10rem;" data-sb-validations="required"></textarea>
-                  <div class="invalid-feedback" data-sb-feedback="message:required">Comment is required.</div>
-                </div>
-                <!-- Name input -->
-                <div class="mb-3">
-                  <input class="form-control" id="name" type="text" placeholder="Name *" data-sb-validations="required" />
-                  <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
-                </div>
-                <!-- Email address input -->
-                <div class="mb-3">
-                  <input class="form-control" id="emailAddress" type="email*" placeholder="Email Address *" data-sb-validations="required, email" />
-                  <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                  <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                </div>
-                <!-- Form submissions success message -->
-                <div class="d-none" id="submitSuccessMessage">
-                  <div class="text-center mb-3">Form submission successful!</div>
-                </div>
-                <!-- Form submissions error message -->
-                <div class="d-none" id="submitErrorMessage">
-                  <div class="text-center text-danger mb-3">Error sending message!</div>
-                </div>
-                <!-- Form submit button -->
-                <div class="d-grid">
-                  <button class="main-button" id="submitButton" type="submit">Post Comment</button>
-                </div>
-              </form>
+              <!-- Comment Form -->
+              <h2 class="my-4">Comments</h2>
+        <ul class="list-group mb-4">
+            {% for comment in comments %}
+                <li class="list-group-item">
+                    <p>{{ comment.text }}</p>
+                    <p><small>By {{ comment.name }} on {{ comment.created_at }}</small></p>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No comments yet.</li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="my-4">Leave a Comment</h2>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+                
+                {{ form.text }}
+                <div class="invalid-feedback" data-sb-feedback="message:required">Comment is required.</div>
             </div>
+            <div class="mb-3">
+               
+                {{ form.name }}
+                <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+            </div>
+            <div class="mb-3">
+            
+                {{ form.email }}
+                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address is not valid.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add comment</button>
+        </form>
+    </div>
             <!-----------------------------SIDE BARR---------------------------->
             <div class="sidebar col-md-4">
               <div class="input-group">
@@ -110,7 +113,7 @@
                       <div class="card-text article-meta">
                         <span><i class="far fa-user"></i> Posted by {{popular.author}} </span><span><i class="far fa-calendar"></i> {{popular.pub_date}}</span><span><i class="far fa-comment-alt"></i> 300 comments</span>
                       </div>
-                      <a href="{% url 'article' popular.title %}" class="btn btn-outline-light">Read More</a>
+                      <a href="{% url 'article' popular.pk   %}" class="btn btn-outline-light">Read More</a>
                       </div>
                     </div>
                   </div>

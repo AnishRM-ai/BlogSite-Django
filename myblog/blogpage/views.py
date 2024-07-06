@@ -1,11 +1,33 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Blog
-from .forms import BlogCreate
+from .forms import BlogCreate, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-# Create your views here.
+
+
+
+#Comments view
+def comment_view(request, pk):
+    blog = get_object_or_404(Blog, pk = pk)
+    comments = blog.comments.all()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = blog
+            comment.name = request.user
+            comment.save()
+            return redirect('post_detail', pk=blog.pk)
+        
+    else:
+        form = CommentForm()
+    return render(request, 'single_post.html', {'blog': blog, 'comments': comments, 'form':form})
+            
+    
+    
+
 def home(request):
     blog = Blog.objects.all()
     return render(request, 'index.html',{'blog': blog})
@@ -60,10 +82,21 @@ def logout_view(request):
     return redirect('homepage')
     
 
-def singleBlog(request, title):
+def singleBlog(request, pk):
     popularBlog = Blog.objects.filter(is_popular = True)
-    blog = get_object_or_404(Blog, title=title)
-    return render(request, 'single_post.html', {'blog': blog, 'popularblog': popularBlog})
+    blog = get_object_or_404(Blog, pk = pk)
+    comments = blog.comments.all()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = blog
+            comment.save()
+            return redirect('article', pk=blog.pk)
+        
+    else:
+        form = CommentForm()
+    return render(request, 'single_post.html', {'blog': blog, 'comments': comments, 'form':form, 'popularblog':popularBlog})
     
 
 #about page view

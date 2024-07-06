@@ -101,7 +101,7 @@
                   <div class="post-meta">
                     <span><i class="far fa-user"></i> Posted by {{blogpost.author}}</span><span><i class="far fa-calendar"></i> {{blogpost.pub_date}}</span>
                   </div>
-                  <a href="{% url 'article' blogpost.title %}"  class="post-title">{{blogpost.title}}</a>
+                  <a href="{% url 'article' blogpost.pk %}"  class="post-title">{{blogpost.title}}</a>
                   <p class="post-content">{{ blogpost.contents|safe |truncatewords:25 }} </p>
                   <div class="post-meta">
                     <span><i class="far fa-comment-alt"></i> 20 comments</span>
